@@ -3,3 +3,12 @@
 !/src/
 !.gitignore
 !CMakeLists.txt
+!README.md
+!/build/
+/build/*
+!/build/conf.cmd
+!/build/build.cmd
+!/build-linux/
+/build-linux/*
+!/build-linux/conf.sh
+!/etc/

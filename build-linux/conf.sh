@@ -1,0 +1,1 @@
+cmake -G "Unix Makefiles"  -DCMAKE_BUILD_TYPE="Debug" -DCMAKE_INSTALL_PREFIX="debug" -DGTEST_ROOT="/media/Elements/SDK/googletest/build-linux/debug" -DGTEST_LIBRARY="/media/Elements/SDK/googletest/build-linux/debug/lib/libgtestd.a" -DGTEST_MAIN_LIBRARY="/media/Elements/SDK/googletest/build-linux/debug/lib/libgtest_maind.a" ..

@@ -1,0 +1,3 @@
+set CMAKE="C:\Program Files (x86)\CMake\bin\cmake.exe"
+call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x64
+%CMAKE% -G "NMake Makefiles"  -DCMAKE_BUILD_TYPE="Debug" -DCMAKE_INSTALL_PREFIX="debug" -DCMAKE_PREFIX_PATH="F:\SDK\opencv-3.2.0\build;F:\SDK\boost_1_60_0" -DGTEST_ROOT="F:\SDK\googletest\build-mdd\debug" -DGTEST_LIBRARY="F:\SDK\googletest\build-mdd\debug\lib\gtestd.lib" -DGTEST_MAIN_LIBRARY="F:\SDK\googletest\build-mdd\debug\lib\gtest_maind.lib" -DBOOST_LIBRARYDIR="F:\SDK\boost_1_60_0\lib64-msvc-14.0" ..
