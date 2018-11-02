@@ -1,0 +1,20 @@
+cmake_minimum_required (VERSION 2.8)
+project (regula)
+
+// ---------- dependencies ------------
+find_package(OpenCV REQUIRED )
+find_package( Boost REQUIRED )
+
+include_directories( ${OpenCV_INCLUDE_DIRS} )
+include_directories( ${Boost_INCLUDE_DIR} )
+link_directories( ${Boost_LIBRARY_DIRS} )
+set( Boost_USE_STATIC_LIBS        OFF )
+set( Boost_USE_MULTITHREADED      ON )
+set( Boost_USE_STATIC_RUNTIME     OFF )
+set( BOOST_ALL_DYN_LINK ON )
+
+subdirs(${PROJECT_NAME} src)
+
+add_executable(${PROJECT_NAME} main.cpp)
+target_link_libraries (${PROJECT_NAME} ${OpenCV_LIBS}) 
+target_link_libraries (${PROJECT_NAME} ${Boost_LIBRARIES}) 
