@@ -2,7 +2,9 @@
 #include <opencv2/imgproc/imgproc.hpp>
 #include <iostream>
 
+#if defined(_MSC_VER)
 __declspec(dllexport)
+#endif
 void detectFaces(cv::CascadeClassifier &faceCascade, std::string imgPath, cv::Mat image, std::vector<cv::Rect> &foundFaces) {
     if (image.empty()) {
         throw std::invalid_argument("image");

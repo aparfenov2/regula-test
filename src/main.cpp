@@ -9,15 +9,17 @@
 
 namespace fs = boost::filesystem;
 
+#if defined(_MSC_VER)
 __declspec(dllimport)
+#endif
 void detectFaces(cv::CascadeClassifier &faceCascade, std::string imgPath, cv::Mat image, std::vector<cv::Rect> &foundFaces);
 
 
-class UnsupportedImageFormatException : public std::exception {
+class UnsupportedImageFormatException : public std::runtime_error {
 public:
 	fs::path imgPath;
 public:
-	UnsupportedImageFormatException(fs::path imgPath) :std::exception(imgPath.string().c_str()), imgPath(imgPath) {
+	UnsupportedImageFormatException(fs::path imgPath) :std::runtime_error(imgPath.string().c_str()), imgPath(imgPath) {
 	}
 };
 

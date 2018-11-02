@@ -4,7 +4,9 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
+#if defined(_MSC_VER)
 __declspec(dllimport)
+#endif
 void detectFaces(cv::CascadeClassifier &faceCascade, std::string imgPath, cv::Mat image, std::vector<cv::Rect> &foundFaces);
 
 class CnFirstTest : public ::testing::Test {
