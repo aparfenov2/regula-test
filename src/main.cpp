@@ -10,7 +10,7 @@
 namespace fs = boost::filesystem;
 
 __declspec(dllimport)
-void detectFaces(cv::CascadeClassifier &faceCascade, cv::Mat image, std::vector<cv::Rect> &foundFaces);
+void detectFaces(cv::CascadeClassifier &faceCascade, std::string imgPath, cv::Mat image, std::vector<cv::Rect> &foundFaces);
 
 
 class UnsupportedImageFormatException : public std::exception {
@@ -38,7 +38,7 @@ public:
 		if (image.empty()) {
 			throw UnsupportedImageFormatException(imgPath);
 		}
-		detectFaces(faceCascade, image, foundFaces);
+		detectFaces(faceCascade, imgPath.string(), image, foundFaces);
 		// blur faces
 		for (auto &r : foundFaces) {
 			auto roi = image(r);
@@ -47,8 +47,6 @@ public:
 		// save 1/2 size jpeg with blurred faces, return file path
 		fs::path newPath = imgPath.parent_path() / fs::path("blurred_" + imgPath.stem().string() +  imgPath.extension().string());
 		cv::imwrite(newPath.string(), image);
-		// print file path & num of faces
-		std::cout << imgPath << ": numFaces: " << foundFaces.size() << std::endl;
 		return newPath;
 	}
 
