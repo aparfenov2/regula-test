@@ -1,13 +1,17 @@
 #include <vector>
 #include <iostream>
 #include <opencv2/objdetect/objdetect.hpp>
-#include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
+#include <opencv2/highgui/highgui.hpp>
 #include <boost/filesystem.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/json_parser.hpp>
 
 namespace fs = boost::filesystem;
+
+__declspec(dllimport)
+void detectFaces(cv::CascadeClassifier &faceCascade, cv::Mat image, std::vector<cv::Rect> &foundFaces);
+
 
 class UnsupportedImageFormatException : public std::exception {
 public:
@@ -29,19 +33,12 @@ public:
 		}
 	}
 
-	void detectFaces(cv::Mat image, std::vector<cv::Rect> &foundFaces) {
-		cv::Mat grayImg;
-		cv::cvtColor(image, grayImg, CV_BGR2GRAY);
-		cv::equalizeHist(grayImg, grayImg);
-		faceCascade.detectMultiScale(grayImg, foundFaces, 1.1, 2, 0 | CV_HAAR_SCALE_IMAGE, cv::Size(30, 30));
-	}
-
 	fs::path processImage(fs::path imgPath, std::vector<cv::Rect> &foundFaces) {
 		auto image = cv::imread(imgPath.string(), CV_LOAD_IMAGE_COLOR);
 		if (image.empty()) {
 			throw UnsupportedImageFormatException(imgPath);
 		}
-		detectFaces(image, foundFaces);
+		detectFaces(faceCascade, image, foundFaces);
 		// blur faces
 		for (auto &r : foundFaces) {
 			auto roi = image(r);
